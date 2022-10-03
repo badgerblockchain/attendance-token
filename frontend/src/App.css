@@ -1,0 +1,75 @@
+.App {
+  /* Makes everything aligned in the center */
+  text-align: center;
+}
+
+.App-header {
+  /* Creates a dark background with other formatting logic */
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.primary {
+  /* Greeting using blockchain color set */
+  color: orangered;
+}
+
+.connect_wallet {
+  /* fetch/set greeting button properties */
+  color: black;
+  background-color: orangered;
+  border: none;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 10px; /* Makes btn round */
+  padding: 25px; /* Changes size */
+  margin-bottom: 1rem;
+}
+.connect_wallet:hover {
+  /* color changes to red when mouse over btn */
+  color: red;
+  background-color: black;
+}
+.connect_wallet:active {
+  /* btn turn white very quick for user to know they clicked the btn */
+  color: white;
+  background-color: white;
+}
+
+.btn_props {
+  /* fetch/set greeting button properties */
+  color: orangered;
+  background-color: black;
+  border: none;
+  font-size: large;
+  border-radius: 10px; /* Makes btn round */
+  padding: 15px; /* Changes size */
+  margin-bottom: 1rem;
+}
+.btn_props:hover {
+  /* color changes to red when mouse over btn */
+  color: black;
+  background-color: red;
+}
+.btn_props:active {
+  /* btn turn white very quick for user to know they clicked the btn */
+  color: white;
+  background-color: white;
+}
+
+.text_box {
+  /* Set greeting textbox properties */
+  color: white;
+  background-color: black;
+  border: none;
+  font-size: 20px;
+  border-radius: 10px; /* Makes btn round */
+  padding: 15px; /* Changes size */
+  margin-bottom: 1rem;
+}
