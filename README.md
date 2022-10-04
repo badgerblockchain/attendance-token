@@ -1,6 +1,8 @@
 # BadgeToken
 
-Reward token and website interface for the [Badger Blockchain Club](https://www.badgerblockchain.com/) at UW_Madison.
+Reward token and website interface for the [Badger Blockchain Club](https://www.badgerblockchain.com/) at UW-Madison.
+
+View the BadgeToken on [Goerli TestNet etherscan](https://goerli.etherscan.io/token/0x7700D96fEa6337a6CA1B1704E3CdF066e965b73b).
 
 
 Will need user to manually add token and faucet goerli to account
