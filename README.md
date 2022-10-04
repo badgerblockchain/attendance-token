@@ -35,7 +35,7 @@ only need to use **npm install** on the first run
 **TODO**
 
 
-**RANDOM NOTES**
+**RANDOM NOTES used later**
 
 
 To deploy a new token to the goerli testnet use cmmd:
