@@ -30,7 +30,7 @@ cd frontend
 npm install
 npm start
 ```
-only need to use **nppm install** on the first run
+only need to use **npm install** on the first run
 
 **TODO**
 
