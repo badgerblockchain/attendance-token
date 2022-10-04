@@ -55,7 +55,11 @@ https://github.com/mikec3/my_tutorials/blob/master/simple_token_wallet/src/Walle
 VIDEO I HAVE BEEN WATCHING:
 https://www.youtube.com/watch?v=c8Pkz1NqWNw
 
+<<<<<<< HEAD
 # IN PROGRESS
+=======
+# TODO
+>>>>>>> old
 - only use one contract called BadgeTest(update the name)
 - After the contract is deployed look it up on etherscan and set up the "contract" (make sure to user compiler 0.8.3)
 - check behavior by starting site and clicking button
