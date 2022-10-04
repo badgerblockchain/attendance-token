@@ -39,12 +39,11 @@ function App() {
 // Executes when "Connect Wallet" gets clicked. Checks if a user has the metamask extension. If not a 
 // tab gets opened taking them to the web store where they can download it. If the user has a metamask account
 // ethers will use window.ethereum to see which accounts are conencted to the site. If this is a user's first time
-// connecting metamask will open a page for them to select a wallet (make sure to pick the one you imported!)
+// connecting metamask will open a page for them to select a wallet (make sure to pick the one you imported tokens to!)
 // If a user was connected from before a message will be displayed indicating what their account addr is
   const onClickConnect = async () => {
     try {
       if(hasMetaMask.current === false){ // if false then chrome tab will open for you to download
-        onboarding.startOnboarding();
       }
       else{ // connects user wallet
         accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -59,7 +58,7 @@ function App() {
     }
   };
 
-  // Function executes when "Trasnfer Token" is clicked. Calls the smart contract, reads the current greeting value
+  // Function executes when "Trasnfer Token" is clicked. Calls the smart contract
   //
   // TODO add better header description
   async function tokenTransfer(){
@@ -70,7 +69,7 @@ function App() {
 
       // used for badger gretting, helpful comments
     // const signer = provider.getSigner()             // signer is used to make read/write changes on the blockchian while provider is only read
-     const erc20_token = new ethers.Contract(accounts, Token.abi, provider) // signderOrProvder determines if a read or read/write occurs
+     const erc20_token = new ethers.Contract(accounts, Token.abi, provider) // signder or provder param determines if a read or read/write occurs
       // ^^ 2 lines above are important to explain
       
       try {
@@ -121,8 +120,8 @@ function App() {
       <header className="App-header">
         <img src={image} alt=""/>
         <h1 className ='primary'>Attendance Reward</h1>
-        <button className="connect_wallet" onClick={onClickConnect}>Connect Wallet</button> {/*when button is clicked it invokes the fetch Greeting method */}
-          <button className="btn_props" onClick={tokenTransfer}>Get BadgeToken</button> {/*when button is clicked it invokes the fetch Greeting method */}
+        <button className="connect_wallet" onClick={onClickConnect}>Connect Wallet</button> 
+          <button className="btn_props" onClick={tokenTransfer}>Get BadgeToken</button> {/*when button is clicked it transfers tokens to user wallet */}
           <div id = "set"></div>
       </header>
     </div>
@@ -130,3 +129,10 @@ function App() {
 
 }
 export default App;
+
+
+// TODO add display of top 10 wallets 
+// ethers method: signer.getBalance( [ blockTag = "latest" ] ) ⇒ Promise< BigNumber >source
+// Returns the balance of this wallet at blockTag.
+
+// could be helpful
