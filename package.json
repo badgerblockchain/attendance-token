@@ -2,7 +2,7 @@
   "name": "blockchain-token",
   "version": "1.0.0",
   "description": "TODO",
-  "repository": "https://github.com/badgerblockchain/blockchain-greeting.git",
+  "repository": "git clone https://github.com/badgerblockchain/attendance-token.git",
   "scripts": {
     "format": "npx prettier --write ."
   },
