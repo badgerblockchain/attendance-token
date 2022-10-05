@@ -41,6 +41,9 @@ The local instance of the website should launch after the npm start cmd is execu
 
 ## Frontend
 1. Switch to the Goerli test network by opening MetaMask. If you do not see Goerli, then click on **Show/hide test networks** and toggle the option to "on". Goerli should populate in the list of testnets. 
+
+<img width="356" alt="Screen Shot 2022-10-05 at 2 29 08 PM" src="https://user-images.githubusercontent.com/71794995/194146594-84165486-dfe5-432a-94a3-61a621cb06e2.png">
+
 2. Import Token to Metamask by clicking on **Import Token** on the Goerli testnet. Use the following address `0x7700D96fEa6337a6CA1B1704E3CdF066e965b73b`.
      
 <img width="365" alt="Screen Shot 2022-10-05 at 2 25 29 PM" src="https://user-images.githubusercontent.com/71794995/194145468-41a35964-a359-448e-8d7c-3d475d7a850d.png">
