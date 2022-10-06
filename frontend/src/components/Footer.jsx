@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 
 function Footer() {
   return (
-    <Container className="d-flex p-3 justify-content-center">
+    <Container className="d-flex justify-content-center">
       <Row>
         <Col>
           <h3>frequently asked </h3>

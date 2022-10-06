@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 
 function Header() {
   return (
-    <Container className="d-flex p-3 justify-content-center">
+    <Container className="d-flex p-2 justify-content-center">
       <Row>
         <Col xs={12}>
           <h1>

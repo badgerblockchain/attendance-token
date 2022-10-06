@@ -119,7 +119,6 @@ function App() {
       <div className="App">
         <Header />
         <header className="App-header">
-            <button className="btn_props" onClick={tokenTransfer}>Get BadgeToken</button> {/*when button is clicked it transfers tokens to user wallet */}
             <WalletTable />
         </header>
         <Footer />
