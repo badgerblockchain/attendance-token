@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import WalletTable from "./components/WalletTable";
+import Container from "react-bootstrap/Container";
 import { ethers } from 'ethers';
-import {Helmet} from "react-helmet";
 import MetaMaskOnboarding from '@metamask/onboarding'; // only executes if user doesn't have metamask install; add to package json
 // TODO did not add: to README dependenciesnpm install @metamask/onboarding
 
@@ -112,22 +115,20 @@ function App() {
   
  ////**** return function at the bottom drives the rest of the code ****////
   return (
-    
-    <div className="App">
-      <Helmet>
-        <title>Badger Blocks</title> {/* text that is on the chrome tab */}
-      </Helmet>
-      <header className="App-header">
-        <img src={image} alt=""/>
-        <h1 className ='primary'>Attendance Reward</h1>
-        <button className="connect_wallet" onClick={onClickConnect}>Connect Wallet</button> 
-          <button className="btn_props" onClick={tokenTransfer}>Get BadgeToken</button> {/*when button is clicked it transfers tokens to user wallet */}
-          <div id = "set"></div>
-      </header>
-    </div>
+    <Container>
+      <div className="App">
+        <Header />
+        <header className="App-header">
+            <button className="btn_props" onClick={tokenTransfer}>Get BadgeToken</button> {/*when button is clicked it transfers tokens to user wallet */}
+            <WalletTable />
+        </header>
+        <Footer />
+      </div>
+    </Container> 
   );
 
 }
+
 export default App;
 
 
