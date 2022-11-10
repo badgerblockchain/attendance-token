@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WalletTable from "./components/WalletTable";
+import Faq from "./components/Faq";
 import Container from "react-bootstrap/Container";
 import { ethers } from 'ethers';
 import MetaMaskOnboarding from '@metamask/onboarding'; // only executes if user doesn't have metamask install; add to package json
@@ -118,10 +119,11 @@ function App() {
     <Container>
       <div className="App">
         <Header />
-        <header className="App-header">
+        <header className="">
             <WalletTable />
         </header>
         <Footer />
+        <Faq></Faq>
       </div>
     </Container> 
   );

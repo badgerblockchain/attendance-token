@@ -10,7 +10,6 @@ function Header() {
       <Row>
         <Col xs={12}>
           <h1>
-            {" "}
             <span className="bb-color">badger blockchain</span> token dashboard{" "}
           </h1>
         </Col>
