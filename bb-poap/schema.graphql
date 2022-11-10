@@ -1,0 +1,20 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  tokenOwner: Bytes! # address
+  spender: Bytes! # address
+}
+
+type Approval @entity {
+  id: ID!
+  address_from: Bytes!
+  address_to: Bytes!
+  number_tokens: Int! # address
+}
+
+type Transfer @entity {
+  id: ID!
+  address_from: Bytes!
+  address_to: Bytes!
+  number_tokens: Int! # address
+}
