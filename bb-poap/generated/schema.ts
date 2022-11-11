@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ExampleEntity extends Entity {
+export class BadgeToken extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,18 +19,18 @@ export class ExampleEntity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ExampleEntity entity without an ID");
+    assert(id != null, "Cannot save BadgeToken entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ExampleEntity must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type BadgeToken must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("ExampleEntity", id.toString(), this);
+      store.set("BadgeToken", id.toString(), this);
     }
   }
 
-  static load(id: string): ExampleEntity | null {
-    return changetype<ExampleEntity | null>(store.get("ExampleEntity", id));
+  static load(id: string): BadgeToken | null {
+    return changetype<BadgeToken | null>(store.get("BadgeToken", id));
   }
 
   get id(): string {
@@ -42,30 +42,89 @@ export class ExampleEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
-    return value!.toBigInt();
-  }
-
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
-  }
-
-  get tokenOwner(): Bytes {
-    let value = this.get("tokenOwner");
+  get address_from(): Bytes {
+    let value = this.get("address_from");
     return value!.toBytes();
   }
 
-  set tokenOwner(value: Bytes) {
-    this.set("tokenOwner", Value.fromBytes(value));
+  set address_from(value: Bytes) {
+    this.set("address_from", Value.fromBytes(value));
   }
 
-  get spender(): Bytes {
-    let value = this.get("spender");
+  get address_to(): Bytes {
+    let value = this.get("address_to");
     return value!.toBytes();
   }
 
-  set spender(value: Bytes) {
-    this.set("spender", Value.fromBytes(value));
+  set address_to(value: Bytes) {
+    this.set("address_to", Value.fromBytes(value));
+  }
+
+  get number_tokens(): i32 {
+    let value = this.get("number_tokens");
+    return value!.toI32();
+  }
+
+  set number_tokens(value: i32) {
+    this.set("number_tokens", Value.fromI32(value));
+  }
+}
+
+export class Transfer extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Transfer entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Transfer must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Transfer", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Transfer | null {
+    return changetype<Transfer | null>(store.get("Transfer", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address_from(): Bytes {
+    let value = this.get("address_from");
+    return value!.toBytes();
+  }
+
+  set address_from(value: Bytes) {
+    this.set("address_from", Value.fromBytes(value));
+  }
+
+  get address_to(): Bytes {
+    let value = this.get("address_to");
+    return value!.toBytes();
+  }
+
+  set address_to(value: Bytes) {
+    this.set("address_to", Value.fromBytes(value));
+  }
+
+  get number_tokens(): i32 {
+    let value = this.get("number_tokens");
+    return value!.toI32();
+  }
+
+  set number_tokens(value: i32) {
+    this.set("number_tokens", Value.fromI32(value));
   }
 }

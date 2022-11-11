@@ -13,8 +13,7 @@ dataSources:
       apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Transfer
+        - BadgeToken
       abis:
         - name: BadgeToken
           file: ./abis/BadgeToken.json

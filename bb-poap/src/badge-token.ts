@@ -1,34 +1,25 @@
-import { BigInt } from "@graphprotocol/graph-ts"
 import {
-  BadgeToken,
-  Approval,
-  Transfer
+  Approval as ApprovalEvent,
+  Transfer as TransferEvent,
 } from "../generated/BadgeToken/BadgeToken"
-import { ExampleEntity } from "../generated/schema"
+import { BadgeToken, Transfer } from "../generated/schema"
 
-export function handleApproval(event: Approval): void {
-  // Entities can be loaded from the store using a string ID; this ID
-  // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+// export function handleApproval(event: ApprovalEvent): void {
+//   let approval = new Approval(event.params._event.toHex());
+//   if (!approval) {
+//     approval.address_from = event.params.owner.toString();
+//     approval.address_to = event.params.spender;
+//     approval.number_tokens = event.params.value;
+//   }
+//   approval.save()
+// }
 
-  // Entities only exist after they have been saved to the store;
-  // `null` checks allow to create entities on demand
-  if (!entity) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
-
-    // Entity fields can be set using simple assignments
-    entity.count = BigInt.fromI32(0)
+export function handleTransfer(event: TransferEvent): void {
+  let transfer = BadgeToken.load(event.params.tokenOwner.toString());
+  if (!transfer) {
+    transfer.address_from = event.params.from
+    transfer.address_to = event.params.to
+    transfer.number_tokens = event.params.value
   }
-
-  // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
-
-  // Entity fields can be set based on event parameters
-  entity.tokenOwner = event.params.tokenOwner
-  entity.spender = event.params.spender
-
-  // Entities can be written to the store with `.save()`
-  entity.save()
+  transfer.save()
 }
-
-export function handleTransfer(event: Transfer): void {}
