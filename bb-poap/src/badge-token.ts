@@ -40,7 +40,7 @@ export function handleTransfer(event: TransferEvent): void {
     token.uniqueHolderCount += 1;
     token.save();
   }
-  let fromHolder = Holder.load(event.params.to);
+  let fromHolder = Holder.load(event.params.from);
   if (!fromHolder) {
     fromHolder = new Holder(event.params.to);
     fromHolder.balance = BigInt.fromI32(0);
