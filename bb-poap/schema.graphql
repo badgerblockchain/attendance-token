@@ -1,13 +1,32 @@
-type BadgeToken @entity {
-  id: ID!
-  address_from: Bytes!
-  address_to: Bytes!
-  number_tokens: Int! # address
+type Token @entity {
+  " {Token Address} "
+  id: Bytes!
+  symbol: String!
+  name: String!
+  decimals: Int!
+  totalSupply: BigInt!
+  transferCount: Int!
+  transfers: [Transfer!]! @derivedFrom(field: "token")
+  uniqueHolderCount: Int!
+  holders: [Holder!]! @derivedFrom(field: "token")
 }
 
-type Transfer @entity {
-  id: ID!
-  address_from: Bytes!
-  address_to: Bytes!
-  number_tokens: Int! # address
+type Transfer @entity(immutable: true) {
+  " {transaction hash}-{log index} "
+  id: Bytes!
+  from: Holder!
+  to: Holder!
+  token: Token!
+  amount: BigInt!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  hash: Bytes! # transaction hash
+}
+
+type Holder @entity {
+  " {Contract Address} "
+  id: Bytes!
+  token: Token!
+  balance: BigInt!
+  receives: [Transfer!]! @derivedFrom(field: "to")
 }

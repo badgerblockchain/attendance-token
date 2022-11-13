@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class Approval extends ethereum.Event {
@@ -88,7 +88,7 @@ export class BadgeToken extends ethereum.SmartContract {
       "allowance(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(tokenOwner),
-        ethereum.Value.fromAddress(spender)
+        ethereum.Value.fromAddress(spender),
       ]
     );
 
@@ -104,7 +104,7 @@ export class BadgeToken extends ethereum.SmartContract {
       "allowance(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(tokenOwner),
-        ethereum.Value.fromAddress(spender)
+        ethereum.Value.fromAddress(spender),
       ]
     );
     if (result.reverted) {
@@ -117,7 +117,7 @@ export class BadgeToken extends ethereum.SmartContract {
   approve(spender: Address, tokens: BigInt): boolean {
     let result = super.call("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(tokens)
+      ethereum.Value.fromUnsignedBigInt(tokens),
     ]);
 
     return result[0].toBoolean();
@@ -126,7 +126,7 @@ export class BadgeToken extends ethereum.SmartContract {
   try_approve(spender: Address, tokens: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("approve", "approve(address,uint256):(bool)", [
       ethereum.Value.fromAddress(spender),
-      ethereum.Value.fromUnsignedBigInt(tokens)
+      ethereum.Value.fromUnsignedBigInt(tokens),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -137,7 +137,7 @@ export class BadgeToken extends ethereum.SmartContract {
 
   balanceOf(tokenOwner: Address): BigInt {
     let result = super.call("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(tokenOwner)
+      ethereum.Value.fromAddress(tokenOwner),
     ]);
 
     return result[0].toBigInt();
@@ -145,7 +145,7 @@ export class BadgeToken extends ethereum.SmartContract {
 
   try_balanceOf(tokenOwner: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("balanceOf", "balanceOf(address):(uint256)", [
-      ethereum.Value.fromAddress(tokenOwner)
+      ethereum.Value.fromAddress(tokenOwner),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -187,7 +187,7 @@ export class BadgeToken extends ethereum.SmartContract {
   safeAdd(a: BigInt, b: BigInt): BigInt {
     let result = super.call("safeAdd", "safeAdd(uint256,uint256):(uint256)", [
       ethereum.Value.fromUnsignedBigInt(a),
-      ethereum.Value.fromUnsignedBigInt(b)
+      ethereum.Value.fromUnsignedBigInt(b),
     ]);
 
     return result[0].toBigInt();
@@ -199,7 +199,7 @@ export class BadgeToken extends ethereum.SmartContract {
       "safeAdd(uint256,uint256):(uint256)",
       [
         ethereum.Value.fromUnsignedBigInt(a),
-        ethereum.Value.fromUnsignedBigInt(b)
+        ethereum.Value.fromUnsignedBigInt(b),
       ]
     );
     if (result.reverted) {
@@ -212,7 +212,7 @@ export class BadgeToken extends ethereum.SmartContract {
   safeDiv(a: BigInt, b: BigInt): BigInt {
     let result = super.call("safeDiv", "safeDiv(uint256,uint256):(uint256)", [
       ethereum.Value.fromUnsignedBigInt(a),
-      ethereum.Value.fromUnsignedBigInt(b)
+      ethereum.Value.fromUnsignedBigInt(b),
     ]);
 
     return result[0].toBigInt();
@@ -224,7 +224,7 @@ export class BadgeToken extends ethereum.SmartContract {
       "safeDiv(uint256,uint256):(uint256)",
       [
         ethereum.Value.fromUnsignedBigInt(a),
-        ethereum.Value.fromUnsignedBigInt(b)
+        ethereum.Value.fromUnsignedBigInt(b),
       ]
     );
     if (result.reverted) {
@@ -237,7 +237,7 @@ export class BadgeToken extends ethereum.SmartContract {
   safeMul(a: BigInt, b: BigInt): BigInt {
     let result = super.call("safeMul", "safeMul(uint256,uint256):(uint256)", [
       ethereum.Value.fromUnsignedBigInt(a),
-      ethereum.Value.fromUnsignedBigInt(b)
+      ethereum.Value.fromUnsignedBigInt(b),
     ]);
 
     return result[0].toBigInt();
@@ -249,7 +249,7 @@ export class BadgeToken extends ethereum.SmartContract {
       "safeMul(uint256,uint256):(uint256)",
       [
         ethereum.Value.fromUnsignedBigInt(a),
-        ethereum.Value.fromUnsignedBigInt(b)
+        ethereum.Value.fromUnsignedBigInt(b),
       ]
     );
     if (result.reverted) {
@@ -262,7 +262,7 @@ export class BadgeToken extends ethereum.SmartContract {
   safeSub(a: BigInt, b: BigInt): BigInt {
     let result = super.call("safeSub", "safeSub(uint256,uint256):(uint256)", [
       ethereum.Value.fromUnsignedBigInt(a),
-      ethereum.Value.fromUnsignedBigInt(b)
+      ethereum.Value.fromUnsignedBigInt(b),
     ]);
 
     return result[0].toBigInt();
@@ -274,7 +274,7 @@ export class BadgeToken extends ethereum.SmartContract {
       "safeSub(uint256,uint256):(uint256)",
       [
         ethereum.Value.fromUnsignedBigInt(a),
-        ethereum.Value.fromUnsignedBigInt(b)
+        ethereum.Value.fromUnsignedBigInt(b),
       ]
     );
     if (result.reverted) {
@@ -317,7 +317,7 @@ export class BadgeToken extends ethereum.SmartContract {
   transfer(to: Address, tokens: BigInt): boolean {
     let result = super.call("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(to),
-      ethereum.Value.fromUnsignedBigInt(tokens)
+      ethereum.Value.fromUnsignedBigInt(tokens),
     ]);
 
     return result[0].toBoolean();
@@ -326,7 +326,7 @@ export class BadgeToken extends ethereum.SmartContract {
   try_transfer(to: Address, tokens: BigInt): ethereum.CallResult<boolean> {
     let result = super.tryCall("transfer", "transfer(address,uint256):(bool)", [
       ethereum.Value.fromAddress(to),
-      ethereum.Value.fromUnsignedBigInt(tokens)
+      ethereum.Value.fromUnsignedBigInt(tokens),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -342,7 +342,7 @@ export class BadgeToken extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(to),
-        ethereum.Value.fromUnsignedBigInt(tokens)
+        ethereum.Value.fromUnsignedBigInt(tokens),
       ]
     );
 
@@ -360,7 +360,7 @@ export class BadgeToken extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(from),
         ethereum.Value.fromAddress(to),
-        ethereum.Value.fromUnsignedBigInt(tokens)
+        ethereum.Value.fromUnsignedBigInt(tokens),
       ]
     );
     if (result.reverted) {

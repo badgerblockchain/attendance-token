@@ -8,72 +8,117 @@ import {
   store,
   Bytes,
   BigInt,
-  BigDecimal
+  BigDecimal,
 } from "@graphprotocol/graph-ts";
 
-export class BadgeToken extends Entity {
-  constructor(id: string) {
+export class Token extends Entity {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save BadgeToken entity without an ID");
+    assert(id != null, "Cannot save Token entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type BadgeToken must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.BYTES,
+        `Entities of type Token must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("BadgeToken", id.toString(), this);
+      store.set("Token", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): BadgeToken | null {
-    return changetype<BadgeToken | null>(store.get("BadgeToken", id));
+  static load(id: Bytes): Token | null {
+    return changetype<Token | null>(store.get("Token", id.toHexString()));
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
     return value!.toString();
   }
 
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
   }
 
-  get address_from(): Bytes {
-    let value = this.get("address_from");
-    return value!.toBytes();
+  get name(): string {
+    let value = this.get("name");
+    return value!.toString();
   }
 
-  set address_from(value: Bytes) {
-    this.set("address_from", Value.fromBytes(value));
+  set name(value: string) {
+    this.set("name", Value.fromString(value));
   }
 
-  get address_to(): Bytes {
-    let value = this.get("address_to");
-    return value!.toBytes();
-  }
-
-  set address_to(value: Bytes) {
-    this.set("address_to", Value.fromBytes(value));
-  }
-
-  get number_tokens(): i32 {
-    let value = this.get("number_tokens");
+  get decimals(): i32 {
+    let value = this.get("decimals");
     return value!.toI32();
   }
 
-  set number_tokens(value: i32) {
-    this.set("number_tokens", Value.fromI32(value));
+  set decimals(value: i32) {
+    this.set("decimals", Value.fromI32(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value!.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get transferCount(): i32 {
+    let value = this.get("transferCount");
+    return value!.toI32();
+  }
+
+  set transferCount(value: i32) {
+    this.set("transferCount", Value.fromI32(value));
+  }
+
+  get transfers(): Array<Bytes> {
+    let value = this.get("transfers");
+    return value!.toBytesArray();
+  }
+
+  set transfers(value: Array<Bytes>) {
+    this.set("transfers", Value.fromBytesArray(value));
+  }
+
+  get uniqueHolderCount(): i32 {
+    let value = this.get("uniqueHolderCount");
+    return value!.toI32();
+  }
+
+  set uniqueHolderCount(value: i32) {
+    this.set("uniqueHolderCount", Value.fromI32(value));
+  }
+
+  get holders(): Array<Bytes> {
+    let value = this.get("holders");
+    return value!.toBytesArray();
+  }
+
+  set holders(value: Array<Bytes>) {
+    this.set("holders", Value.fromBytesArray(value));
   }
 }
 
 export class Transfer extends Entity {
-  constructor(id: string) {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
   }
 
   save(): void {
@@ -81,50 +126,145 @@ export class Transfer extends Entity {
     assert(id != null, "Cannot save Transfer entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type Transfer must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.BYTES,
+        `Entities of type Transfer must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Transfer", id.toString(), this);
+      store.set("Transfer", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): Transfer | null {
-    return changetype<Transfer | null>(store.get("Transfer", id));
+  static load(id: Bytes): Transfer | null {
+    return changetype<Transfer | null>(store.get("Transfer", id.toHexString()));
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get address_from(): Bytes {
-    let value = this.get("address_from");
     return value!.toBytes();
   }
 
-  set address_from(value: Bytes) {
-    this.set("address_from", Value.fromBytes(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
-  get address_to(): Bytes {
-    let value = this.get("address_to");
+  get from(): Bytes {
+    let value = this.get("from");
     return value!.toBytes();
   }
 
-  set address_to(value: Bytes) {
-    this.set("address_to", Value.fromBytes(value));
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
   }
 
-  get number_tokens(): i32 {
-    let value = this.get("number_tokens");
-    return value!.toI32();
+  get to(): Bytes {
+    let value = this.get("to");
+    return value!.toBytes();
   }
 
-  set number_tokens(value: i32) {
-    this.set("number_tokens", Value.fromI32(value));
+  set to(value: Bytes) {
+    this.set("to", Value.fromBytes(value));
+  }
+
+  get token(): Bytes {
+    let value = this.get("token");
+    return value!.toBytes();
+  }
+
+  set token(value: Bytes) {
+    this.set("token", Value.fromBytes(value));
+  }
+
+  get amount(): BigInt {
+    let value = this.get("amount");
+    return value!.toBigInt();
+  }
+
+  set amount(value: BigInt) {
+    this.set("amount", Value.fromBigInt(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value!.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value!.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+
+  get hash(): Bytes {
+    let value = this.get("hash");
+    return value!.toBytes();
+  }
+
+  set hash(value: Bytes) {
+    this.set("hash", Value.fromBytes(value));
+  }
+}
+
+export class Holder extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Holder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type Holder must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Holder", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): Holder | null {
+    return changetype<Holder | null>(store.get("Holder", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get token(): Bytes {
+    let value = this.get("token");
+    return value!.toBytes();
+  }
+
+  set token(value: Bytes) {
+    this.set("token", Value.fromBytes(value));
+  }
+
+  get balance(): BigInt {
+    let value = this.get("balance");
+    return value!.toBigInt();
+  }
+
+  set balance(value: BigInt) {
+    this.set("balance", Value.fromBigInt(value));
+  }
+
+  get receives(): Array<Bytes> {
+    let value = this.get("receives");
+    return value!.toBytesArray();
+  }
+
+  set receives(value: Array<Bytes>) {
+    this.set("receives", Value.fromBytesArray(value));
   }
 }

@@ -1,4 +1,4 @@
-specVersion: 0.0.4
+specVersion: 0.0.5
 schema:
   file: schema.graphql
 dataSources:
@@ -10,17 +10,14 @@ dataSources:
       abi: BadgeToken
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - Transfer
+        - BadgeToken
       abis:
         - name: BadgeToken
           file: BadgeToken/abis/BadgeToken.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
       file: BadgeToken/BadgeToken.wasm
