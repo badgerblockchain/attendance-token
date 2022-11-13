@@ -26,6 +26,8 @@ export function handleTransfer(event: TransferEvent): void {
     token.uniqueHolderCount = 0;
     token.save();
   }
+  token.transferCount += 1;
+  token.save();
 
   // get or create holders entity
   let toHolder = Holder.load(event.params.to);
