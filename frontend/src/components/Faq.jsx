@@ -14,5 +14,5 @@ export default function Faq() {
     },
   ];
 
-  return <p> footer </p>;
+  return <p> FAQ </p>;
 }
