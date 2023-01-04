@@ -2,10 +2,14 @@
   "name": "react-dapp",
   "version": "1.0.0",
   "dependencies": {
+    "@apollo/client": "^3.7.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.2",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "graphql": "^16.6.0",
     "react": "^18.1.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.1.0",
@@ -36,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
   }
 }

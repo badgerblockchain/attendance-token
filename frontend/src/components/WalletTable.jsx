@@ -1,24 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { ethers } from "ethers";
-import MetaMaskOnboarding from "@metamask/onboarding";
 
+import MetaMaskOnboarding from "@metamask/onboarding";
 // our imports
 import Token from "../artifacts/contracts/BadgeToken.sol/BadgeToken.json";
+import AddressResolver from "./AddressResolver";
+import { gql, useQuery } from "@apollo/client";
 
 function WalletTable() {
   const onboarding = new MetaMaskOnboarding(); // used to help user download metamask if not installed
   const hasMetaMask = useRef(false); // determines whether user should be linked to metamask install
   // used in onClickConnect
   let accounts;
-  // executes upon load and starts the executes isMetaMaskInstalled()
-  useEffect(() => {
-    hasMetaMask.current = isMetaMaskInstalled();
-  }, []);
 
   // checks if the MetaMask extension is installed
   const isMetaMaskInstalled = () => {
@@ -110,58 +108,40 @@ function WalletTable() {
     }
   }
 
-  const data = [
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
+  // Define our Query
+  const top10HoldersQuery = gql`
+    query getTop10Holders(
+      $first: Int!
+      $orderBy: String!
+      $orderDirection: String!
+    ) {
+      holders(
+        first: $first
+        orderBy: $orderBy
+        orderDirection: $orderDirection
+      ) {
+        id
+        balance
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(top10HoldersQuery, {
+    variables: {
+      first: 10,
+      orderBy: "balance",
+      orderDirection: "desc",
     },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-    {
-      "Wallet Address": 0x1525,
-      "Number of Tokens": 10000,
-      "Date of First Token": "05/12/2022",
-    },
-  ];
+  });
+
+  // executes upon load and starts the executes isMetaMaskInstalled()
+  useEffect(() => {
+    hasMetaMask.current = isMetaMaskInstalled();
+  }, []);
+
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+
   return (
     <Container className="d-flex justify-content-center">
       <Row>
@@ -187,12 +167,14 @@ function WalletTable() {
               </tr>
             </thead>
             <tbody>
-              {data.map((items, index) => (
-                <tr>
+              {data.holders.map((item, index) => (
+                <tr key={item.id}>
                   <td>{index + 1}</td>
-                  <td>{items["Wallet Address"]}</td>
-                  <td>{items["Number of Tokens"]}</td>
-                  <td>{items["Date of First Token"]}</td>
+                  <td>
+                    <AddressResolver id={item.id} />
+                  </td>
+                  <td>{item.balance}</td>
+                  <td>x</td>
                 </tr>
               ))}
             </tbody>
