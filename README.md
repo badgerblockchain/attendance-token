@@ -86,7 +86,6 @@ https://www.youtube.com/watch?v=c8Pkz1NqWNw
 - check behavior by starting site and clicking button
 - put private keys in env vars
 - prettify front-end
-
-## USER ONLY CAN CLICK ONCE PER MEETING IF THEY ARE IN THE LOCATION
-
-## REDEEM BUTTON TRANSFERS TOKEN BACK TO MAIN WALLET
+- change name to **BadgerToken** (or another name?)
+- add photo so that MetaMask recognizes it
+- determine better tokeneconomics (set amount, not unlimited number)

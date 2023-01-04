@@ -8,7 +8,7 @@ import {
   store,
   Bytes,
   BigInt,
-  BigDecimal,
+  BigDecimal
 } from "@graphprotocol/graph-ts";
 
 export class Token extends Entity {
@@ -250,13 +250,13 @@ export class Holder extends Entity {
     this.set("token", Value.fromBytes(value));
   }
 
-  get balance(): BigInt {
+  get balance(): BigDecimal {
     let value = this.get("balance");
-    return value!.toBigInt();
+    return value!.toBigDecimal();
   }
 
-  set balance(value: BigInt) {
-    this.set("balance", Value.fromBigInt(value));
+  set balance(value: BigDecimal) {
+    this.set("balance", Value.fromBigDecimal(value));
   }
 
   get receives(): Array<Bytes> {

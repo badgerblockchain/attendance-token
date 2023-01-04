@@ -27,6 +27,6 @@ type Holder @entity {
   " {Contract Address} "
   id: Bytes!
   token: Token!
-  balance: BigInt!
+  balance: BigDecimal!
   receives: [Transfer!]! @derivedFrom(field: "to")
 }

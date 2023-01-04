@@ -3,7 +3,7 @@ import {
   Transfer as TransferEvent,
 } from "../generated/BadgeToken/BadgeToken";
 import { Holder, Token, Transfer } from "../generated/schema";
-import { BigInt } from "@graphprotocol/graph-ts";
+import { BigDecimal, BigInt } from "@graphprotocol/graph-ts";
 
 export function handleTransfer(event: TransferEvent): void {
   const btAddress = BadgeToken.bind(event.address);
@@ -33,7 +33,7 @@ export function handleTransfer(event: TransferEvent): void {
   let toHolder = Holder.load(event.params.to);
   if (!toHolder) {
     toHolder = new Holder(event.params.to);
-    toHolder.balance = BigInt.fromI32(0);
+    toHolder.balance = BigDecimal.fromString("0");
     toHolder.token = token.id;
     toHolder.save();
 
@@ -43,7 +43,7 @@ export function handleTransfer(event: TransferEvent): void {
   let fromHolder = Holder.load(event.params.from);
   if (!fromHolder) {
     fromHolder = new Holder(event.params.to);
-    fromHolder.balance = BigInt.fromI32(0);
+    fromHolder.balance = BigDecimal.fromString("0");
     fromHolder.token = token.id;
     fromHolder.save();
 
@@ -56,10 +56,10 @@ export function handleTransfer(event: TransferEvent): void {
   const tryToBalance = btAddress.try_balanceOf(event.params.to);
   fromHolder.balance = tryFromBalance.reverted
     ? fromHolder.balance
-    : tryFromBalance.value;
+    : tryFromBalance.value.toBigDecimal().div(BigDecimal.fromString("1000000000000000000"));
   toHolder.balance = tryToBalance.reverted
     ? toHolder.balance
-    : tryToBalance.value;
+    : tryToBalance.value.toBigDecimal().div(BigDecimal.fromString("1000000000000000000"));;
   fromHolder.save();
   toHolder.save();
 
