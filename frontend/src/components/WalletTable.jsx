@@ -10,6 +10,7 @@ import MetaMaskOnboarding from "@metamask/onboarding";
 // our imports
 import Token from "../artifacts/contracts/BadgeToken.sol/BadgeToken.json";
 import AddressResolver from "./AddressResolver";
+import DateResolver from "./DateResolver";
 import { gql, useQuery } from "@apollo/client";
 
 function WalletTable() {
@@ -114,6 +115,8 @@ function WalletTable() {
       $first: Int!
       $orderBy: String!
       $orderDirection: String!
+      $timestamp: String!
+      $asc: String!
     ) {
       holders(
         first: $first
@@ -122,6 +125,10 @@ function WalletTable() {
       ) {
         id
         balance
+        receives(orderBy: $timestamp, orderDirection: $asc) {
+          id
+          timestamp
+        }
       }
     }
   `;
@@ -131,6 +138,8 @@ function WalletTable() {
       first: 10,
       orderBy: "balance",
       orderDirection: "desc",
+      timestamp: "timestamp",
+      asc: "asc",
     },
   });
 
@@ -161,7 +170,7 @@ function WalletTable() {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Wallet Addr</th>
+                <th>Wallet's</th>
                 <th>Number of Tokens</th>
                 <th>Date of First Token</th>
               </tr>
@@ -174,7 +183,9 @@ function WalletTable() {
                     <AddressResolver id={item.id} />
                   </td>
                   <td>{item.balance}</td>
-                  <td>x</td>
+                  <td>
+                    <DateResolver randomDate={item.receives[0].timestamp} />
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -1,9 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WalletTable from "./components/WalletTable";
-import Faq from "./components/Faq";
-import Container from "react-bootstrap/Container";
+import FAQ from "./components/FAQ";
+import { Container, Col, Row } from "react-bootstrap";
 import { ethers } from "ethers";
 import MetaMaskOnboarding from "@metamask/onboarding"; // only executes if user doesn't have metamask install; add to package json
 // TODO did not add: to README dependenciesnpm install @metamask/onboarding
@@ -120,26 +120,58 @@ function App() {
       }
     }
   }
+  const [faqs, setFaqs] = useState([
+    {
+      question: "what is badger blockchain?",
+      answer:
+        "Badger Blockchain is a student organization at the University of Wisconsin-Madison, educating students about blockchain technology and its applications.",
+      open: false,
+    },
+    {
+      question: "how do you use this application?",
+      answer:
+        "Connect your wallet using the connect button, if you don't have a wallet, download metamask. Once connected, you will recieve 10 tokens.",
+      open: false,
+    },
+    {
+      question: "what do the tokens do?",
+      answer:
+        "Once you have 100 tokens, you can transfer them back to our custudial wallet, and you will recieve either a Badger Blockchain NFT, 1 free slice of Ian's Pizza, or 3 free Greenbush donuts.",
+      open: false,
+    },
+  ]);
+
+  const toggleFAQ = (index) => {
+    setFaqs(
+      faqs.map((faq, i) => {
+        if (i === index) {
+          faq.open = !faq.open;
+        } else {
+          faq.open = false;
+        }
+
+        return faq;
+      })
+    );
+  };
 
   ////**** return function at the bottom drives the rest of the code ****////
   return (
-    <Container>
-      <div className="App">
+    <div className="App">
+      <Container fluid>
         <Header />
-        <header className="">
-          <WalletTable />
-        </header>
-        <Faq />
+        <WalletTable />
+        <Row>
+          {faqs.map((faq, index) => (
+            <Col sm={4} className="faqs" key={index}>
+              <FAQ faq={faq} index={index} key={index} toggleFAQ={toggleFAQ} />
+            </Col>
+          ))}
+        </Row>
         <Footer />
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }
 
 export default App;
-
-// TODO add display of top 10 wallets
-// ethers method: signer.getBalance( [ blockTag = "latest" ] ) ⇒ Promise< BigNumber >source
-// Returns the balance of this wallet at blockTag.
-
-// could be helpful

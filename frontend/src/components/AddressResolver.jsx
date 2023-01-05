@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
+import "./components.css";
 
 export default function AddressResolver({ id }) {
   const [ensDomain, setEnsDomain] = useState("");
@@ -34,7 +35,9 @@ export default function AddressResolver({ id }) {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <p className="p-0 m-0">{!ensDomain ? id : ensDomain}</p>
+        <p className={"m-0 p-0 " + (!ensDomain ? "" : "ens-color")}>
+          {!ensDomain ? id : ensDomain}
+        </p>
       )}
     </div>
   );

@@ -2,13 +2,17 @@
   color: #c5050c;
 }
 
+.ens-color {
+  color: rgb(44, 70, 166);
+  font-weight: bold;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
 .footer {
   text-align: left;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  margin-top: auto;
   margin-left: 5px;
+  width: 100%;
   border-top: 0.5px solid black;
 }
 
