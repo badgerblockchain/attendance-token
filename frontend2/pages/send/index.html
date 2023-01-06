@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drop Tokens</title>
+    <link rel="stylesheet" href="index.css">
+    <title>Airdrop BadgeToken</title>
 </head>
 <body>
     <h1>Badger Blockchain Token Dashboard</h1>
@@ -13,17 +14,18 @@
             <th>Wallet Addresses</th>
         </tr>
     </table>
+    <button onclick="fetch('/clear')">Clear Requests</button>
     <form method="POST">
         <input type="submit" value="Pay">
     </form>
     <script>
         function poll() {
-            fetch('/data/addrs.txt')
-            .then(response => response.text())
-            .then(textString => {
+            fetch('/accounts')
+            .then(response => response.json())
+            .then(response => {
                 tableHTML = "<tr><th>Wallet Addresses</th></tr>"
-                const addrs = textString.split('\n');
-                addrs.forEach(addr => {
+                response.accounts.forEach(addr => {
+                    console.log(addr)
                     tableHTML += "<tr><td>" + addr + "</td></tr>";
                 });
                 document.getElementById("addrTable").innerHTML = tableHTML;
