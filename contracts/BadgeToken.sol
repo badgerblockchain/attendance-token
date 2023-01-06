@@ -133,4 +133,13 @@ contract BadgeToken is ERC20Interface, SafeMath {
         emit Transfer(from, to, tokens);
         return true;
     }
+
+    function bulkTransfer(address[] memory addresses, uint tokensEach) public returns (bool success) {
+        balances[msg.sender] = safeSub(balances[msg.sender], tokensEach*addresses.length);
+        for(uint i = 0; i < addresses.length; i++) {
+            balances[addresses[i]] = safeAdd(balances[addresses[i]], tokensEach);
+            emit Transfer(msg.sender, addresses[i], tokensEach);
+        }
+        return true;
+    }
 }
