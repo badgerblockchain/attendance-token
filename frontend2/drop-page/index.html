@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop Tokens</title>
+</head>
+<body>
+    <h1>Badger Blockchain Token Dashboard</h1>
+    <table id="addrTable">
+        <tr>
+            <th>Wallet Addresses</th>
+        </tr>
+    </table>
+    <form method="POST">
+        <input type="submit" value="Pay">
+    </form>
+    <script>
+        function poll() {
+            fetch('/data/addrs.txt')
+            .then(response => response.text())
+            .then(textString => {
+                tableHTML = "<tr><th>Wallet Addresses</th></tr>"
+                const addrs = textString.split('\n');
+                addrs.forEach(addr => {
+                    tableHTML += "<tr><td>" + addr + "</td></tr>";
+                });
+                document.getElementById("addrTable").innerHTML = tableHTML;
+            });
+        }
+        poll();
+        setInterval(poll, 1000);
+    </script>
+</body>
+</html>

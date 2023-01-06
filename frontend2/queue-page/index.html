@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Queue</title>
+</head>
+<body>
+    <h1>Get Badge Tokens for attending the meeting!</h1>
+    <h2 id="walletStatus">Status: Metamask Not Installed</h2>
+    <button id="walletConnect">Connect Wallet</button>
+    <form id="btButton" style="display: none;" method="POST">
+        <input type="hidden" id="pubKey" name="pubKey">
+        <input type="submit" value="Get BT">
+    </form>
+    <script>
+        if (typeof window.ethereum !== 'undefined') {
+            document.getElementById("walletStatus").innerHTML = "Status: No Wallet Connected";
+        } else {
+            document.getElementById("walletConnect").style.display = "none";
+        }
+        
+        document.querySelector("#walletConnect").addEventListener('click', () => {
+            getAccount();
+        });
+
+        async function getAccount() {
+            try {
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
+                document.getElementById("walletStatus").innerHTML = "Status: Connected to " + account;
+                document.getElementById("pubKey").value = account;
+                document.getElementById("btButton").style.display = "inline-block";
+            } catch (error){
+                console.log(error);
+            }
+        }
+    </script>
+</body>
+</html>
