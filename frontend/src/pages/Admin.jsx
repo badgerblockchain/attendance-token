@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+import DataTable from "../components/DataTable";
 import "./Pages.css";
 
 export default function Admin() {
@@ -74,8 +75,14 @@ export default function Admin() {
         ))}
       </Row>
       <Row>
-        <Col md={8}></Col>
-        <Col md={4}></Col>
+        <Col md={6}>
+          <h2 className="header"> Addresses in Queue </h2>
+          <DataTable />
+        </Col>
+        <Col md={6}>
+          <h2 className="header"> All Info </h2>
+          <DataTable />
+        </Col>
       </Row>
 
       {/* Modal for Airdrop confirmation*/}
