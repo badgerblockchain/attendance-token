@@ -21,6 +21,7 @@ import Token from "../artifacts/contracts/BadgeToken.sol/BadgeToken.json";
 export default function Home() {
   const onboarding = new MetaMaskOnboarding(); // used to help user download metamask if not installed
   const hasMetaMask = useRef(false); // determines whether user should be linked to metamask install
+  const [accountAddr, setAccountAddr] = useState(null); // used to store user wal
 
   let accounts;
 
@@ -54,6 +55,7 @@ export default function Home() {
         });
         console.log("user account: " + accounts); // used in debugging console
         alert("User's account " + accounts + " is connected");
+        setAccountAddr(accounts); // sets the accountAddr to the user's account
       }
       // Will open the MetaMask UI
       // You should disable this button while the request is pending! -why?
@@ -155,7 +157,6 @@ export default function Home() {
     );
   };
 
-  ////**** return function at the bottom drives the rest of the code ****////
   return (
     <div className="App">
       <Container fluid>
@@ -169,6 +170,13 @@ export default function Home() {
               claim
             </Button>
           </Col>
+        </Row>
+        <Row>
+          {accountAddr ? (
+            <h6 className="d-flex justify-content-center">
+              👌 Your account: {accountAddr}
+            </h6>
+          ) : null}
         </Row>
         <WalletTable />
         <Row>

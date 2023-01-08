@@ -15,7 +15,10 @@ export default function Admin() {
     navigate("/");
   }
 
-  function handleAirdrop() {}
+  function handleAirdrop() {
+    console.log("they really want to airdrop");
+    setShow(false);
+  }
 
   const metrics = [
     {
@@ -75,6 +78,7 @@ export default function Admin() {
         <Col md={4}></Col>
       </Row>
 
+      {/* Modal for Airdrop confirmation*/}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Airdrop</Modal.Title>
@@ -86,7 +90,7 @@ export default function Admin() {
           <Button variant="secondary" onClick={handleClose}>
             No
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleAirdrop}>
             Yes, Airdrop
           </Button>
         </Modal.Footer>
