@@ -1,13 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import DataTable from "../components/DataTable";
+// firebase imports
+import { db } from "../firebase";
+import { collection, getDocs, deleteDoc } from "firebase/firestore";
+
+import DataTableAll from "../components/DataTableAll";
+import DataTableQueue from "../components/DataTableQueue";
 import "./Pages.css";
 
 export default function Admin() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  const addressCollectionRef = collection(db, "addresses");
+
+  useEffect(() => {
+    const getAddresses = async () => {
+      const data = await getDocs(addressCollectionRef);
+      console.log(data);
+      setAddresses(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const querySnapshot = await getDocs(addressCollectionRef);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // console.log(doc.id, " => ", doc.data());
+        setAddresses(doc.data());
+        console.log(doc.data());
+        console.log("here are the things in your db", addresses);
+      });
+    };
+
+    getAddresses();
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -49,6 +74,15 @@ export default function Admin() {
     },
   ];
 
+  const handleDeleteAddresses = async () => {
+    const querySnapshot = await getDocs(collection(db, "addresses"));
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      deleteDoc(doc.ref);
+    });
+    window.location.reload();
+  };
+
   return (
     <Container fluid>
       <Row>
@@ -60,6 +94,13 @@ export default function Admin() {
             </Button>
             <Button className="home-btn" variant="danger" onClick={handleShow}>
               Airdrop Token
+            </Button>
+            <Button
+              className="home-btn"
+              variant="secondary"
+              onClick={handleDeleteAddresses}
+            >
+              Delete Addresses in Queue
             </Button>
           </div>
         </Col>
@@ -77,11 +118,11 @@ export default function Admin() {
       <Row>
         <Col md={6}>
           <h2 className="header"> Addresses in Queue </h2>
-          <DataTable />
+          <DataTableQueue />
         </Col>
         <Col md={6}>
           <h2 className="header"> All Info </h2>
-          <DataTable />
+          <DataTableAll />
         </Col>
       </Row>
 

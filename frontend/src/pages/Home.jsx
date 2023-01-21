@@ -3,11 +3,14 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import WalletTable from "../components/WalletTable";
 import FAQ from "../components/FAQ";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import { Container, Col, Row, Button, Modal } from "react-bootstrap";
 import { ethers } from "ethers";
 import MetaMaskOnboarding from "@metamask/onboarding"; // only executes if user doesn't have metamask install; add to package json
 // TODO did not add: to README dependenciesnpm install @metamask/onboarding
 
+// firebase imports
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 //import detectEthereumProvider from '@metamask/detect-provider' // LOOKING INTO SOMETHING -> npm i @metamask/detect-provider
 
 import "../App.css"; // imports css styles
@@ -21,9 +24,16 @@ import Token from "../artifacts/contracts/BadgeToken.sol/BadgeToken.json";
 export default function Home() {
   const onboarding = new MetaMaskOnboarding(); // used to help user download metamask if not installed
   const hasMetaMask = useRef(false); // determines whether user should be linked to metamask install
-  const [accountAddr, setAccountAddr] = useState(null); // used to store user wal
+  const [accountAddr, setAccountAddr] = useState(""); // used to store user wal
 
   let accounts;
+
+  const addressCollectionRef = collection(db, "addresses");
+  const totalAddressCollectionRef = collection(db, "all-addresses-ever");
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const handleClose = () => setShowError(false);
+  const handleCloseSuccess = () => setShowSuccess(false);
 
   // https://docs.metamask.io/guide/create-dapp.html#project-setup   useful link to use understand how to use dapp in metamask
 
@@ -157,6 +167,29 @@ export default function Home() {
     );
   };
 
+  const addAddressToFirebase = async () => {
+    console.log("adding address to firebase");
+    if (!accountAddr) {
+      console.log("not connected!");
+      setShowError(true);
+      return;
+    }
+
+    // TODO DO NOT ADD DUPLICATES
+    // add to queue, which is cleared after every airdrop
+    await addDoc(addressCollectionRef, {
+      address: accountAddr.toString(),
+      timestamp: Date.now(),
+    });
+
+    // add to total collection, so we can tell every address that has claimed
+    await addDoc(totalAddressCollectionRef, {
+      address: accountAddr.toString(),
+      timestamp: Date.now(),
+    });
+
+    setShowSuccess(true);
+  };
   return (
     <div className="App">
       <Container fluid>
@@ -166,7 +199,11 @@ export default function Home() {
             <Button className="m-3" variant="primary" onClick={onClickConnect}>
               connect
             </Button>
-            <Button className="m-3" variant="danger" onClick={tokenTransfer}>
+            <Button
+              className="m-3"
+              variant="danger"
+              onClick={addAddressToFirebase}
+            >
               claim
             </Button>
           </Col>
@@ -187,6 +224,36 @@ export default function Home() {
           ))}
         </Row>
         <Footer />
+
+        {/* Alert Modal for Address Connection Error*/}
+        <Modal show={showError} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>You Need To Connect First!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Uh Oh Looks Like You Need To Connect Your Wallet First 😕!
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* Alert Modal for Address Connection Success*/}
+        <Modal show={showSuccess} onHide={handleCloseSuccess}>
+          <Modal.Header closeButton>
+            <Modal.Title>Success!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            You've been added to the queue to redeem your tokens! Please wait.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseSuccess}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Container>
     </div>
   );
