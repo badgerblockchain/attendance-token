@@ -1,0 +1,33 @@
+.header {
+  margin: 10px;
+}
+
+.home-btn {
+  margin: 10px;
+}
+.metrics-card {
+  border-radius: 10px;
+  background: rgba(204, 204, 204, 0.5);
+  margin: 10px;
+  box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.metrics-title {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  color: black;
+  font-weight: 600;
+}
+
+.metrics-numbers {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  font-weight: 400;
+}

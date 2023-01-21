@@ -1,18 +1,17 @@
-export default function Faq() {
-  const QandA = [
-    {
-      question: "What is the Badger Blockchain Token?",
-      answer: "It is Great!",
-    },
-    {
-      question: "What is Badger Blockchain?",
-      answer: "A Student Org!",
-    },
-    {
-      question: "What can I do with this token?",
-      answer: "Anything!",
-    },
-  ];
+import React from "react";
+import "../App.css";
 
-  return <p> FAQ </p>;
-}
+const FAQ = ({ faq, index, toggleFAQ }) => {
+  return (
+    <div
+      className={"faq " + (faq.open ? "open" : "")}
+      key={index}
+      onClick={() => toggleFAQ(index)}
+    >
+      <div className="faq-question">{faq.question}</div>
+      <div className="faq-answer">{faq.answer}</div>
+    </div>
+  );
+};
+
+export default FAQ;
