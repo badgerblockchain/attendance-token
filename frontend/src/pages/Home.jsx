@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import WalletTable from "../components/WalletTable";
-import FAQ from "../components/FAQ";
+import FAQ from "../components/Faq";
 import { Container, Col, Row, Button, Modal } from "react-bootstrap";
 import { ethers } from "ethers";
 import MetaMaskOnboarding from "@metamask/onboarding"; // only executes if user doesn't have metamask install; add to package json
@@ -140,7 +140,7 @@ export default function Home() {
       open: false,
     },
     {
-      question: "how do you use this application?",
+      question: "how do you use this app?",
       answer:
         "Connect your wallet using the connect button, if you don't have a wallet, download metamask. Once connected, you will recieve 10 tokens.",
       open: false,
