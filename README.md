@@ -2,7 +2,7 @@
 
 Reward token and website interface for the [Badger Blockchain Club](https://www.badgerblockchain.com/) at UW-Madison.
 
-View the BadgerToken on [Goerli TestNet etherscan](https://goerli.etherscan.io/token/0x7700D96fEa6337a6CA1B1704E3CdF066e965b73b).
+View the BadgerToken on [Goerli TestNet etherscan](https://goerli.etherscan.io/token/0xEFf3485745a32a93788eB7cC249A534F77682522).
 
 - Read [Development Guide](https://github.com/badgerblockchain/development-guide/blob/main/introduction.md), then follow the quick start guide below.
   - The repo we are using is found [here](https://github.com/badgerblockchain/attendance-token)
