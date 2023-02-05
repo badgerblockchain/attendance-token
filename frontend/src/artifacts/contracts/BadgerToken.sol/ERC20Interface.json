@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "ERC20Interface",
-  "sourceName": "contracts/BadgeTest.sol",
+  "sourceName": "contracts/BadgerTest.sol",
   "abi": [
     {
       "anonymous": false,

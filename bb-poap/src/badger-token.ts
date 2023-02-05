@@ -1,12 +1,12 @@
 import {
-  BadgeToken,
+  BadgerToken,
   Transfer as TransferEvent,
-} from "../generated/BadgeToken/BadgeToken";
+} from "../generated/BadgerToken/BadgerToken";
 import { Holder, Token, Transfer } from "../generated/schema";
 import { BigDecimal, BigInt } from "@graphprotocol/graph-ts";
 
 export function handleTransfer(event: TransferEvent): void {
-  const btAddress = BadgeToken.bind(event.address);
+  const btAddress = BadgerToken.bind(event.address);
 
   // get or create token entity
   let token = Token.load(event.address);

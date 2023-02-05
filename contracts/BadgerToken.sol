@@ -41,10 +41,10 @@ contract SafeMath {
 }
 
 //
-// Contract which creates BadgeToken with an ERC20 interface.
+// Contract which creates BadgerToken with an ERC20 interface.
 // 
 //
-contract BadgeToken is ERC20Interface, SafeMath {
+contract BadgerToken is ERC20Interface, SafeMath {
     string public name;
     string public symbol;
     uint8 public decimals; // 18 decimals is the strongly suggested default, avoid changing it
@@ -63,7 +63,7 @@ contract BadgeToken is ERC20Interface, SafeMath {
      // Called in ~/scripts/deploy_token.js as Token.deploy()
     //
     constructor()  {
-        name = "BadgeToken";
+        name = "BadgerToken";
         symbol = "BT";
         decimals = 18;
         _totalSupply = 100000000000000000000000000;

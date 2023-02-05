@@ -16,7 +16,7 @@ async function main() {
 
 
   // We get the contract to deploy
-  const Token = await hre.ethers.getContractFactory("BadgeToken");
+  const Token = await hre.ethers.getContractFactory("BadgerToken");
   const token = await Token.deploy();
 
   await token.deployed(); // wait for token to be deployed

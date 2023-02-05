@@ -17,7 +17,7 @@ import "../App.css"; // imports css styles
 
 import image from "../badger_pic.png";
 
-import Token from "../artifacts/contracts/BadgeToken.sol/BadgeToken.json";
+import Token from "../artifacts/contracts/BadgerToken.sol/BadgerToken.json";
 
 // const { WALLET_PRIVATE_KEY, TOKEN_ADDRESS } = process.env; TODO look into how to use env vars
 
@@ -83,7 +83,7 @@ export default function Home() {
       //  const sender = "0xfe6d06170feaf0a8f63ebea5de3dd9232bfbc10b"             // account that holds all tokens; maybe have double checker later?
       const private_key =
         "0xfe50325739f44f5f7bdd8ff529a30a268e059c6118f4113d51d109d912b17f63"; // private key of wallet (TODO put in env and hide!)
-      const provider = new ethers.providers.Web3Provider(window.ethereum); // step in obtaining contract var which can call the BadgeToken.sol methods
+      const provider = new ethers.providers.Web3Provider(window.ethereum); // step in obtaining contract var which can call the BadgerToken.sol methods
 
       // used for badger gretting, helpful comments
       // const signer = provider.getSigner()             // signer is used to make read/write changes on the blockchian while provider is only read
@@ -101,7 +101,7 @@ export default function Home() {
 
         console.log(receiver);
 
-        // connect to wallet with Badge Token
+        // connect to wallet with Badger Token
         const wallet_signer = new ethers.Wallet(private_key, provider); // hide private key
         // ^^ https://docs.ethers.io/v5/api/signer/#Wallet explains what a wallet object is
 
@@ -119,7 +119,7 @@ export default function Home() {
         const amountToSend = "10"; // only send 1 token
         const tokens = ethers.utils.parseEther(amountToSend, decimals); // parses the amount to send
 
-        // perform transaction; function found in BadgeToken.sol
+        // perform transaction; function found in BadgerToken.sol
         contract.transfer(receiver, tokens).then(function (tx) {
           console.log(tx);
         });

@@ -3,22 +3,22 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: BadgeToken
+    name: BadgerToken
     network: goerli
     source:
       address: "0x7700D96fEa6337a6CA1B1704E3CdF066e965b73b"
-      abi: BadgeToken
+      abi: BadgerToken
       startBlock: 7701661
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - BadgeToken
+        - BadgerToken
       abis:
-        - name: BadgeToken
-          file: ./abis/BadgeToken.json
+        - name: BadgerToken
+          file: ./abis/BadgerToken.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/badge-token.ts
+      file: ./src/badger-token.ts

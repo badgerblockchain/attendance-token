@@ -1,8 +1,8 @@
-# BadgeToken
+# BadgerToken
 
 Reward token and website interface for the [Badger Blockchain Club](https://www.badgerblockchain.com/) at UW-Madison.
 
-View the BadgeToken on [Goerli TestNet etherscan](https://goerli.etherscan.io/token/0x7700D96fEa6337a6CA1B1704E3CdF066e965b73b).
+View the BadgerToken on [Goerli TestNet etherscan](https://goerli.etherscan.io/token/0x7700D96fEa6337a6CA1B1704E3CdF066e965b73b).
 
 - Read [Development Guide](https://github.com/badgerblockchain/development-guide/blob/main/introduction.md), then follow the quick start guide below.
   - The repo we are using is found [here](https://github.com/badgerblockchain/attendance-token)
@@ -81,7 +81,7 @@ https://www.youtube.com/watch?v=c8Pkz1NqWNw
 
 # IN PROGRESS
 
-- only use one contract called BadgeTest(update the name)
+- only use one contract called BadgerTest(update the name)
 - After the contract is deployed look it up on etherscan and set up the "contract" (make sure to user compiler 0.8.3)
 - check behavior by starting site and clicking button
 - put private keys in env vars

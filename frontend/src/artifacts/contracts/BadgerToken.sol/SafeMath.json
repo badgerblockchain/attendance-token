@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "SafeMath",
-  "sourceName": "contracts/BadgeTest.sol",
+  "sourceName": "contracts/BadgerTest.sol",
   "abi": [
     {
       "inputs": [

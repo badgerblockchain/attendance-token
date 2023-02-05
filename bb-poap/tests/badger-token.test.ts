@@ -8,9 +8,9 @@ import {
 } from "matchstick-as/assembly/index";
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { ExampleEntity } from "../generated/schema";
-import { Approval } from "../generated/BadgeToken/BadgeToken";
-import { handleApproval } from "../src/badge-token";
-import { createApprovalEvent } from "./badge-token-utils";
+import { Approval } from "../generated/BadgerToken/BadgerToken";
+import { handleApproval } from "../src/badger-token";
+import { createApprovalEvent } from "./badger-token-utils";
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

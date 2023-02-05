@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "BadgeTest",
-  "sourceName": "contracts/BadgeTest.sol",
+  "contractName": "BadgerTest",
+  "sourceName": "contracts/BadgerTest.sol",
   "abi": [
     {
       "inputs": [],
